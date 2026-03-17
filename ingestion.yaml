@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ingestion-rest-service
-          image: riyadennis/ingestion-service:latest
+          image: riyadennis/ingestion-rest-service:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8090
@@ -24,7 +24,7 @@ spec:
             - name: REST_PORT
               value: "8090"
             - name: STORAGE_ENDPOINT
-              value: "minio:9000"
+              value: "127.0.0.1:9000"
             - name: STORAGE_USE_SSL
               value: "false"
             - name: STORAGE_ACCESS_KEY
@@ -37,6 +37,29 @@ spec:
             # Make sure there is a Service named `identity-server` listening on this port.
             - name: IDENTITY_URL
               value: "identity-server:8090"
+        - name: minio
+          image: minio/minio:latest
+          args:
+            - server
+            - /data
+            - --console-address
+            - ":9001"
+          ports:
+            - containerPort: 9000
+              name: api
+            - containerPort: 9001
+              name: console
+          env:
+            - name: MINIO_ROOT_USER
+              value: "admin"
+            - name: MINIO_ROOT_PASSWORD
+              value: "password123"
+          volumeMounts:
+            - name: minio-data
+              mountPath: /data
+      volumes:
+        - name: minio-data
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
