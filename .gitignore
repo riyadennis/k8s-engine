@@ -1,0 +1,10 @@
+# Local environment overrides
+.env
+
+# macOS
+.DS_Store
+
+# Editor settings
+.vscode/
+.idea/
+
