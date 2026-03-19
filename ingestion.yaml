@@ -17,12 +17,12 @@ spec:
           image: riyadennis/ingestion-rest-service:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8090
+            - containerPort: 8091
           env:
             - name: LOG_LEVEL
               value: "debug"
             - name: REST_PORT
-              value: "8090"
+              value: "8091"
             - name: STORAGE_ENDPOINT
               value: "127.0.0.1:9000"
             - name: STORAGE_USE_SSL

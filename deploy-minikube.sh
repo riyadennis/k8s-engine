@@ -24,6 +24,7 @@ echo "Make sure this is your Minikube cluster (should be 'minikube')."
 echo "Applying MySQL, identity, and ingestion manifests..."
 kubectl apply -f "$SCRIPT_DIR/mysql.yaml"
 kubectl apply -f "$SCRIPT_DIR/identity.yaml"
+kubectl apply -f "$SCRIPT_DIR/identity-gql.yaml"
 kubectl apply -f "$SCRIPT_DIR/ingestion.yaml"
 
 echo "Waiting for pods to be ready..."
