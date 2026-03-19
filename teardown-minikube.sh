@@ -13,6 +13,7 @@ echo "Make sure this is your Minikube cluster (should be 'minikube')."
 echo "Deleting ingestion, identity, and MySQL manifests..."
 kubectl delete -f "$SCRIPT_DIR/ingestion.yaml" --ignore-not-found
 kubectl delete -f "$SCRIPT_DIR/identity.yaml" --ignore-not-found
+kubectl delete -f "$SCRIPT_DIR/identity-gql.yaml" --ignore-not-found
 kubectl delete -f "$SCRIPT_DIR/mysql.yaml" --ignore-not-found
 
 echo "Current pods after teardown:"

@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: identity-gql-server
+  labels:
+   tier: backend
+   name: identity-gql-server
+spec:
+  containers:
+    - name: identity-gql-server
+      image: riyadennis/identity-gql-server:latest
+      ports:
+        - containerPort: 8092
+      env:
+        - name: GRAPHQL_PORT
+          value: "8092"
+        - name: ISSUER
+          value: "open source"
+        - name: KEY_PATH
+          value: "/var/folders/"
+        - name: MYSQL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: user
+              optional: false
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+              optional: false
+        - name: MYSQL_HOST
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: host
+              optional: false
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: database
+              optional: false
+        - name: MYSQL_PORT
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: port
+              optional: false
+        - name: MIGRATION_PATH
+          value: "/home/webuser/migrations"
